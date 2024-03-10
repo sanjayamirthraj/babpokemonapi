@@ -20,8 +20,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { Button } from "@/components/ui/button";
-
-import { allPokemon } from "@/components/ui/everyPokemonAndAllat";
+import { allpokemon } from "@/components/ui/everyPokemonStarter";
 
 function maketUppercaseFirst(words: String) {
   return words.charAt(0).toUpperCase() + words.slice(1);
@@ -32,17 +31,11 @@ type CardProps = React.ComponentProps<typeof Card>;
 export async function CardGallery({
   stringList,
 }: CardProps & { stringList: string[] }) {
-  const pokemonandallat = [
-    "oshawott",
-    "snivy",
-    "charizard",
-    "ditto",
-    "squirtle",
-    "pikachu",
-    "bulbasaur",
-  ];
+  const practicePokemon =
+    allpokemon[Math.floor(Math.random() * allpokemon.length)];
+
   const cards = await Promise.all(
-    pokemonandallat.map(async (pokemon) => {
+    practicePokemon.map(async (pokemon) => {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}`
       );
@@ -99,8 +92,7 @@ export async function CardGallery({
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Close</AlertDialogCancel>
-                      <AlertDialogAction>Continue</AlertDialogAction>
+                      <AlertDialogAction>Close</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
