@@ -68,5 +68,5 @@ export default function Home() {
     );
   }
 
-  return <CardGallery />;
+  return <CardGallery stringList={["charizard", "ditto", "squirtle"]} />;
 }

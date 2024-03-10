@@ -28,12 +28,15 @@ function maketUppercaseFirst(words: String) {
 
 type CardProps = React.ComponentProps<typeof Card>;
 
-export async function CardGallery({}: CardProps) {
-  const practicePokemon =
-    allpokemon[Math.floor(Math.random() * allpokemon.length)];
-
+export async function CardGallery({
+  stringList,
+}: CardProps & { stringList: string[] }) {
+  // const practicePokemon =
+  //   allpokemon[Math.floor(Math.random() * allpokemon.length)];
+  // const pkmn = [practicePokemon[0], practicePokemon[1], practicePokemon[2]];
+  // console.log(pkmn);
   const cards = await Promise.all(
-    practicePokemon.map(async (pokemon) => {
+    allpokemon.map(async (pokemon) => {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}`
       );
@@ -56,7 +59,7 @@ export async function CardGallery({}: CardProps) {
       return (
         <div
           key={pokemon}
-          className=" p-3 grid grid-cols-1 mx-auto place-items-center"
+          className=" p-7 grid grid-cols-1 mx-auto place-items-center"
         >
           <Card key={pokemon}>
             <CardHeader>
@@ -130,5 +133,34 @@ export async function CardGallery({}: CardProps) {
     })
   );
 
-  return <div className="m-15">{cards}</div>;
+  return (
+    <div>
+      <div
+        className=" m-15 w-full
+      h-full
+      bg-gradient-to-r
+      from-pink-500
+      via-red-500
+      to-yellow-500
+      p-10
+      background-animatez-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"
+      >
+        <p className="bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
+          The Starter Pokemon Pokedex!
+        </p>
+      </div>
+      <div
+        className="m-15 w-full
+      h-full
+      bg-gradient-to-r
+      from-pink-500
+      via-red-500
+      to-yellow-500
+      background-animate
+      grid grid-cols-3"
+      >
+        {cards}
+      </div>
+    </div>
+  );
 }
