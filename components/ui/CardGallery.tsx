@@ -11,10 +11,13 @@ function maketUppercaseFirst(words: String) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-export async function CardGallery() {
-  const pokemonList = ["ditto", "charizard"];
+type CardProps = React.ComponentProps<typeof Card>;
+
+export async function CardGallery({
+  stringList,
+}: CardProps & { stringList: string[] }) {
   const cards = await Promise.all(
-    pokemonList.map(async (pokemon) => {
+    stringList.map(async (pokemon) => {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}`
       );
@@ -27,38 +30,41 @@ export async function CardGallery() {
       const pokemonSecondType = data.types[1]?.type.name;
       const pokemonID = data.id;
       return (
-        <div className=" p-5">
+        <div
+          key={pokemon}
+          className=" p-3 grid grid-cols-1 mx-auto place-items-center"
+        >
           <Card key={pokemon}>
             <CardHeader>
-              <CardTitle>Fuck yeah it&apos;s a {pokemonName}</CardTitle>
+              <CardTitle>{pokemonName}</CardTitle>
               <CardDescription className="font-bold">
-                Its&apos;s a FUCKING {pokemonType} {pokemonSecondType} type
+                Its&apos;s a {pokemonType} {pokemonSecondType} type
               </CardDescription>
             </CardHeader>
             <CardContent className="grid-cols-2	">
               <div className="grid mx-auto grid-cols-2">
-                <div>
+                <div className="p-10">
                   <img
                     src={pokemonImage}
                     alt="This is a Pokemon"
                     width={150}
                     height={150}
                   />
-                  Non Shiny Version and Shit
+                  Non Shiny Version
                 </div>
-                <div>
+                <div className="p-10">
                   <img
                     src={pokemonImageShiny}
                     alt="This is a Pokemon"
                     width={150}
                     height={150}
                   />
-                  Shiny Version and Shit
+                  Shiny Version
                 </div>
               </div>
             </CardContent>
             <CardFooter>
-              <p>This is Pokemon number fucking {pokemonID}</p>
+              <p>This is Pokemon number {pokemonID}</p>
             </CardFooter>
           </Card>
         </div>
