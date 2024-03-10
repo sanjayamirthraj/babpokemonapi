@@ -68,22 +68,5 @@ export default function Home() {
     );
   }
 
-  return (
-    <div
-      className="
-    w-full
-    h-screen
-    bg-gradient-to-r
-    from-pink-500
-    via-red-500
-    to-yellow-500
-    background-animate
-  "
-    >
-      <div>
-        {/* <ProfileForm /> */}
-        <CardGallery stringList={["charizard", "ditto", "squirtle"]} />
-      </div>
-    </div>
-  );
+  return <CardGallery />;
 }

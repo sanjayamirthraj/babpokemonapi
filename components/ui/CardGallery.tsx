@@ -28,9 +28,7 @@ function maketUppercaseFirst(words: String) {
 
 type CardProps = React.ComponentProps<typeof Card>;
 
-export async function CardGallery({
-  stringList,
-}: CardProps & { stringList: string[] }) {
+export async function CardGallery({}: CardProps) {
   const practicePokemon =
     allpokemon[Math.floor(Math.random() * allpokemon.length)];
 
