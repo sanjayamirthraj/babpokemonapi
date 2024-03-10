@@ -21,8 +21,6 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 
 export default function Home() {
-  //const [pokemon, setPokemon] = useState<string[]>(["Ditto"]);
-
   const formSchema = z.object({
     pokemon: z.string().min(2, {
       message: "Pokemon must be at least 2 characters.",
@@ -50,7 +48,7 @@ export default function Home() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>
-                    Pokemon Name (This does not work yet, need to learn dynamic
+                    Pokemon Name(This does not work yet, need to learn dynamic
                     Data Fetching)
                   </FormLabel>
                   <FormControl>
@@ -71,7 +69,7 @@ export default function Home() {
   return (
     <div>
       <ProfileForm />
-      <CardGallery stringList={["ditto", "charizard", "squirtle"]} />
+      <CardGallery stringList={["charizard", "ditto", "squirtle"]} />
     </div>
   );
 }

@@ -21,6 +21,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 
+import { allPokemon } from "@/components/ui/everyPokemonAndAllat";
+
 function maketUppercaseFirst(words: String) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
@@ -30,8 +32,17 @@ type CardProps = React.ComponentProps<typeof Card>;
 export async function CardGallery({
   stringList,
 }: CardProps & { stringList: string[] }) {
+  const pokemonandallat = [
+    "oshawott",
+    "snivy",
+    "charizard",
+    "ditto",
+    "squirtle",
+    "pikachu",
+    "bulbasaur",
+  ];
   const cards = await Promise.all(
-    stringList.map(async (pokemon) => {
+    pokemonandallat.map(async (pokemon) => {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${pokemon}`
       );
@@ -69,7 +80,7 @@ export async function CardGallery({
                       <AlertDialogDescription className="grid grid-col-3">
                         <img src={pokemonSprite} alt="sprite of pokemon"></img>
                         <p>
-                          <b>Height:</b> {data.height} Meters or Feet idk
+                          <b>Height:</b> {data.height / 10} Meters
                         </p>
                         <p>
                           <b>Ability:</b> {maketUppercaseFirst(pokemonAbility)}
