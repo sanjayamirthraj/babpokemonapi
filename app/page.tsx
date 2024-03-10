@@ -49,7 +49,10 @@ export default function Home() {
               name="pokemon"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Pokemon Name</FormLabel>
+                  <FormLabel>
+                    Pokemon Name (This does not work yet, need to learn dynamic
+                    Data Fetching)
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="ENTER A POKEMON" {...field} />
                   </FormControl>
@@ -68,7 +71,6 @@ export default function Home() {
   return (
     <div>
       <ProfileForm />
-      {/* NEED TO FIX THE STRINGLIST STUFF WITH USE CLIENT */}
       <CardGallery stringList={["ditto", "charizard", "squirtle"]} />
     </div>
   );

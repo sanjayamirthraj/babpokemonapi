@@ -7,6 +7,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
+import { Button } from "@/components/ui/button";
+
 function maketUppercaseFirst(words: String) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
@@ -29,6 +43,14 @@ export async function CardGallery({
       const pokemonType = data.types[0].type.name;
       const pokemonSecondType = data.types[1]?.type.name;
       const pokemonID = data.id;
+      const pokemonSprite = data.sprites.front_default;
+      const pokemonAbility = data.abilities[0].ability.name;
+      const pokemonHealthStats = data.stats[0].base_stat;
+      const pokemonAttackStats = data.stats[1].base_stat;
+      const pokemonDefenseStats = data.stats[2].base_stat;
+      const pokemonSpattackStats = data.stats[3].base_stat;
+      const pokemonSpDefenseStats = data.stats[4].base_stat;
+      const pokemonSpeedStats = data.stats[5].base_stat;
       return (
         <div
           key={pokemon}
@@ -36,7 +58,42 @@ export async function CardGallery({
         >
           <Card key={pokemon}>
             <CardHeader>
-              <CardTitle>{pokemonName}</CardTitle>
+              <CardTitle>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button variant="outline">{pokemonName}</Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>{pokemonName}</AlertDialogTitle>
+                      <AlertDialogDescription className="grid grid-col-3">
+                        <img src={pokemonSprite} alt="sprite of pokemon"></img>
+                        <p>
+                          <b>Height:</b> {data.height} Meters or Feet idk
+                        </p>
+                        <p>
+                          <b>Ability:</b> {maketUppercaseFirst(pokemonAbility)}
+                        </p>
+                        <p>
+                          <b>Base Stats:</b>
+                        </p>
+                        <ul>
+                          <li>Health: {pokemonHealthStats}</li>
+                          <li>Attack: {pokemonAttackStats}</li>
+                          <li>Defense: {pokemonDefenseStats}</li>
+                          <li>Sp. Attack: {pokemonSpattackStats}</li>
+                          <li>Sp. Defense: {pokemonSpDefenseStats}</li>
+                          <li>Speed: {pokemonSpeedStats}</li>
+                        </ul>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Close</AlertDialogCancel>
+                      <AlertDialogAction>Continue</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </CardTitle>
               <CardDescription className="font-bold">
                 Its&apos;s a {pokemonType} {pokemonSecondType} type
               </CardDescription>
