@@ -49,6 +49,7 @@ export async function CardGallery({
       const pokemonSecondType = data.types[1]?.type.name;
       const pokemonID = data.id;
       const pokemonSprite = data.sprites.front_default;
+      const pokemonShinySprite = data.sprites.front_shiny;
       const pokemonAbility = data.abilities[0].ability.name;
       const pokemonHealthStats = data.stats[0].base_stat;
       const pokemonAttackStats = data.stats[1].base_stat;
@@ -71,8 +72,27 @@ export async function CardGallery({
                   <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle>{pokemonName}</AlertDialogTitle>
-                      <AlertDialogDescription className="grid grid-col-3">
-                        <img src={pokemonSprite} alt="sprite of pokemon"></img>
+                      <AlertDialogDescription className="grid grid-col-2">
+                        <div className="grid grid-col-2">
+                          <div className="grid mx-auto grid-cols-2">
+                            <div className="p-10">
+                              <img
+                                src={pokemonSprite}
+                                alt="This is a Pokemon"
+                                width={150}
+                                height={150}
+                              />
+                            </div>
+                            <div className="p-10">
+                              <img
+                                src={pokemonShinySprite}
+                                alt="This is a Pokemon"
+                                width={150}
+                                height={150}
+                              />
+                            </div>
+                          </div>
+                        </div>
                         <p>
                           <b>Height:</b> {data.height / 10} Meters
                         </p>
