@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { LampDemo } from "@/components/lamp";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 export default function Home() {
   const formSchema = z.object({
@@ -67,9 +69,21 @@ export default function Home() {
   }
 
   return (
-    <div>
-      <ProfileForm />
-      <CardGallery stringList={["charizard", "ditto", "squirtle"]} />
+    <div
+      className="
+    w-full
+    h-screen
+    bg-gradient-to-r
+    from-pink-500
+    via-red-500
+    to-yellow-500
+    background-animate
+  "
+    >
+      <div>
+        {/* <ProfileForm /> */}
+        <CardGallery stringList={["charizard", "ditto", "squirtle"]} />
+      </div>
     </div>
   );
 }
