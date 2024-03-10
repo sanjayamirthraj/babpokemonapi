@@ -1,7 +1,9 @@
 "use client";
 
+import { CardGallery } from "@/components/ui/CardGallery";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -16,57 +18,59 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
+export default function Home() {
+  const [pokemon, setPokemon] = useState<String[]>([""]);
 
-import { CardGallery } from "@/components/ui/CardGallery";
-import Image from "next/image";
-
-export function ProfileForm() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-    },
+  const formSchema = z.object({
+    pokemon: z.string().min(2, {
+      message: "Pokemon must be at least 2 characters.",
+    }),
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
-}
+  function ProfileForm() {
+    const form = useForm<z.infer<typeof formSchema>>({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        pokemon: "",
+      },
+    });
 
-export default function Home() {
-  return (
-    <>
+    function onSubmit(values: z.infer<typeof formSchema>) {
+      setPokemon([...pokemon, values.pokemon]);
+      console.log(pokemon);
+    }
+    return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="username"
+            name="pokemon"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Username</FormLabel>
+                <FormLabel>Pokemon Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input placeholder="ENTER A FUCKING POKEMON" {...field} />
                 </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
+                <FormDescription>Enter a Fucking Pokemon Name.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Fucking Submit that Shit</Button>
         </form>
       </Form>
-      <CardGallery />
+    );
+  }
+
+  return (
+    <>
+      <div className="p-10">
+        <ProfileForm />
+      </div>
+
+      <div className="p-15">
+        <CardGallery />
+      </div>
     </>
   );
 }
